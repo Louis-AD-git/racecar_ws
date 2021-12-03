@@ -1,0 +1,7 @@
+<launch>
+  
+    <node name="velTop_control" pkg="carTop" type="velTop_control" />
+    <node name="velTop" pkg="carTop" type="velTop" />
+    <node name="carTop" pkg="carTop" type="carTop" />
+
+</launch>

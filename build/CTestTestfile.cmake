@@ -1,0 +1,35 @@
+# CMake generated Testfile for 
+# Source directory: /home/lzh/racecar_ws/src
+# Build directory: /home/lzh/racecar_ws/build
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+subdirs("gtest")
+subdirs("bringup")
+subdirs("lslidar_ws/src/lslidar_c16/lslidar_c16")
+subdirs("navigation-melodic-devel/navigation")
+subdirs("racecar_description")
+subdirs("cartographer_ros-release-1.0/cartographer_ros_msgs")
+subdirs("navigation-melodic-devel/map_server")
+subdirs("lslidar_ws/src/lslidar_c16/lslidar_c16_msgs")
+subdirs("carTop")
+subdirs("imu_driver")
+subdirs("lslidar_ws/src/lslidar_c16/lslidar_c16_driver")
+subdirs("lslidar_ws/src/lslidar_c16/lslidar_c16_decoder")
+subdirs("navigation-melodic-devel/amcl")
+subdirs("navigation-melodic-devel/fake_localization")
+subdirs("tf_broadcast")
+subdirs("cartographer_ros-release-1.0/cartographer_ros")
+subdirs("cartographer_ros-release-1.0/cartographer_rviz")
+subdirs("navigation-melodic-devel/voxel_grid")
+subdirs("navigation-melodic-devel/costmap_2d")
+subdirs("navigation-melodic-devel/nav_core")
+subdirs("navigation-melodic-devel/base_local_planner")
+subdirs("navigation-melodic-devel/carrot_planner")
+subdirs("navigation-melodic-devel/clear_costmap_recovery")
+subdirs("navigation-melodic-devel/dwa_local_planner")
+subdirs("navigation-melodic-devel/move_slow_and_clear")
+subdirs("navigation-melodic-devel/navfn")
+subdirs("navigation-melodic-devel/global_planner")
+subdirs("navigation-melodic-devel/rotate_recovery")
+subdirs("navigation-melodic-devel/move_base")
