@@ -3,9 +3,9 @@
 	<include file="/home/lzh/racecar_ws/src/lslidar_ws/src/lslidar_c16/lslidar_c16_decoder/launch/lslidar_c16.launch"></include>
 
     <node name="tf_broadcast_lidar" pkg="tf_broadcast" type="tf_broadcast_node" >
-		<param name="position_x" type="double" value="0.0" />
+		<param name="position_x" type="double" value="0.37" />
 		<param name="position_y" type="double" value="0.0" />
-		<param name="position_z" type="double" value="0.0" />
+		<param name="position_z" type="double" value="1.1" />
 		<param name="roll" type="double" value="0.0" />
 		<param name="pitch" type="double" value="0.0" />
 		<param name="yaw" type="double" value="0.0" />
@@ -14,9 +14,9 @@
     </node>
 
     <node name="tf_broadcast_imu" pkg="tf_broadcast" type="tf_broadcast_node" >
-		<param name="position_x" type="double" value="0.0" />
+		<param name="position_x" type="double" value="0.32" />
 		<param name="position_y" type="double" value="0.0" />
-		<param name="position_z" type="double" value="0.0" />
+		<param name="position_z" type="double" value="0.9" />
 		<param name="roll" type="double" value="0.0" />
 		<param name="pitch" type="double" value="0.0" />
 		<param name="yaw" type="double" value="0.0" />
@@ -26,12 +26,15 @@
 
 
   
-    <node name="velTop_control" pkg="carTop" type="velTop_control" />
+    <node name="velTop_control_test" pkg="carTop" type="velTop_control_test" />
+		<param name="twist_linear_x" type="double" value="0" />
+		<param name="twist_angular_z" type="double" value="0" />
     <node name="velTop" pkg="carTop" type="velTop" />
-    <node name="carTop" pkg="carTop" type="carTop" />
+    <node name="carTop" pkg="carTop" type="carTop" output="screen"/>
     <node pkg="imu_driver" type="imu_node" name="imu_node" output="screen" >
 		<param name="baudrate" type="int" value="115200" />
 		<param name="port" type="string" value="/dev/ttyUSB0" />
 		<param name="looprate" type="int" value="100" />
+                <remap from="/imu" to="/imu_data" />
     </node>
 </launch>

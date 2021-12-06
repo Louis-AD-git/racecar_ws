@@ -1,7 +1,9 @@
 <launch>
-  
-    <node name="velTop_control" pkg="carTop" type="velTop_control" />
-    <node name="velTop" pkg="carTop" type="velTop" />
-    <node name="carTop" pkg="carTop" type="carTop" />
 
+
+    <node name="velTop_control_test" pkg="carTop" type="velTop_control_test" />
+		<param name="twist_linear_x" type="double" value="0.0" />
+		<param name="twist_angular_z" type="double" value="0.0" />
+    <node name="velTop" pkg="carTop" type="velTop" />
+    <node name="carTop" pkg="carTop" type="carTop" output="screen"/>
 </launch>

@@ -20,15 +20,15 @@
 
   <node name="robot_state_publisher" pkg="robot_state_publisher"
     type="robot_state_publisher" / -->
-  <param name="/use_sim_time" value="true" />
+  <param name="/use_sim_time" value="false" />
 
   <node name="cartographer_node" pkg="cartographer_ros"
       type="cartographer_node" args="
           -configuration_directory $(find cartographer_ros)/configuration_files
           -configuration_basename backpack_2d.lua"
       output="screen">
-    <remap from="scan" to="scan" />
-    <remap from="/imu" to="/imu" />
+    <remap from="/scan" to="/scan" />
+    <remap from="/imu" to="/imu_data" />
   </node>
 
   <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"

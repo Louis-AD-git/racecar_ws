@@ -423,21 +423,6 @@ actionlib_generate_messages_lisp/fast:
 .PHONY : actionlib_generate_messages_lisp/fast
 
 # Convenience name for target.
-carTop/CMakeFiles/carTop_test.dir/rule:
-	cd /home/lzh/racecar_ws/build && $(MAKE) -f CMakeFiles/Makefile2 carTop/CMakeFiles/carTop_test.dir/rule
-.PHONY : carTop/CMakeFiles/carTop_test.dir/rule
-
-# Convenience name for target.
-carTop_test: carTop/CMakeFiles/carTop_test.dir/rule
-
-.PHONY : carTop_test
-
-# fast build rule for target.
-carTop_test/fast:
-	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop_test.dir/build.make carTop/CMakeFiles/carTop_test.dir/build
-.PHONY : carTop_test/fast
-
-# Convenience name for target.
 carTop/CMakeFiles/carTop_generate_messages_nodejs.dir/rule:
 	cd /home/lzh/racecar_ws/build && $(MAKE) -f CMakeFiles/Makefile2 carTop/CMakeFiles/carTop_generate_messages_nodejs.dir/rule
 .PHONY : carTop/CMakeFiles/carTop_generate_messages_nodejs.dir/rule
@@ -496,6 +481,21 @@ carTop_generate_messages_cpp: carTop/CMakeFiles/carTop_generate_messages_cpp.dir
 carTop_generate_messages_cpp/fast:
 	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop_generate_messages_cpp.dir/build.make carTop/CMakeFiles/carTop_generate_messages_cpp.dir/build
 .PHONY : carTop_generate_messages_cpp/fast
+
+# Convenience name for target.
+carTop/CMakeFiles/velTop_control_test.dir/rule:
+	cd /home/lzh/racecar_ws/build && $(MAKE) -f CMakeFiles/Makefile2 carTop/CMakeFiles/velTop_control_test.dir/rule
+.PHONY : carTop/CMakeFiles/velTop_control_test.dir/rule
+
+# Convenience name for target.
+velTop_control_test: carTop/CMakeFiles/velTop_control_test.dir/rule
+
+.PHONY : velTop_control_test
+
+# fast build rule for target.
+velTop_control_test/fast:
+	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/velTop_control_test.dir/build.make carTop/CMakeFiles/velTop_control_test.dir/build
+.PHONY : velTop_control_test/fast
 
 # Convenience name for target.
 carTop/CMakeFiles/actionlib_generate_messages_py.dir/rule:
@@ -584,33 +584,6 @@ src/carTop.cpp.s:
 	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop.dir/build.make carTop/CMakeFiles/carTop.dir/src/carTop.cpp.s
 .PHONY : src/carTop.cpp.s
 
-src/carTop_test.o: src/carTop_test.cpp.o
-
-.PHONY : src/carTop_test.o
-
-# target to build an object file
-src/carTop_test.cpp.o:
-	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop_test.dir/build.make carTop/CMakeFiles/carTop_test.dir/src/carTop_test.cpp.o
-.PHONY : src/carTop_test.cpp.o
-
-src/carTop_test.i: src/carTop_test.cpp.i
-
-.PHONY : src/carTop_test.i
-
-# target to preprocess a source file
-src/carTop_test.cpp.i:
-	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop_test.dir/build.make carTop/CMakeFiles/carTop_test.dir/src/carTop_test.cpp.i
-.PHONY : src/carTop_test.cpp.i
-
-src/carTop_test.s: src/carTop_test.cpp.s
-
-.PHONY : src/carTop_test.s
-
-# target to generate assembly for a file
-src/carTop_test.cpp.s:
-	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/carTop_test.dir/build.make carTop/CMakeFiles/carTop_test.dir/src/carTop_test.cpp.s
-.PHONY : src/carTop_test.cpp.s
-
 src/velTop.o: src/velTop.cpp.o
 
 .PHONY : src/velTop.o
@@ -665,6 +638,33 @@ src/velTop_control.cpp.s:
 	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/velTop_control.dir/build.make carTop/CMakeFiles/velTop_control.dir/src/velTop_control.cpp.s
 .PHONY : src/velTop_control.cpp.s
 
+src/velTop_control_test.o: src/velTop_control_test.cpp.o
+
+.PHONY : src/velTop_control_test.o
+
+# target to build an object file
+src/velTop_control_test.cpp.o:
+	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/velTop_control_test.dir/build.make carTop/CMakeFiles/velTop_control_test.dir/src/velTop_control_test.cpp.o
+.PHONY : src/velTop_control_test.cpp.o
+
+src/velTop_control_test.i: src/velTop_control_test.cpp.i
+
+.PHONY : src/velTop_control_test.i
+
+# target to preprocess a source file
+src/velTop_control_test.cpp.i:
+	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/velTop_control_test.dir/build.make carTop/CMakeFiles/velTop_control_test.dir/src/velTop_control_test.cpp.i
+.PHONY : src/velTop_control_test.cpp.i
+
+src/velTop_control_test.s: src/velTop_control_test.cpp.s
+
+.PHONY : src/velTop_control_test.s
+
+# target to generate assembly for a file
+src/velTop_control_test.cpp.s:
+	cd /home/lzh/racecar_ws/build && $(MAKE) -f carTop/CMakeFiles/velTop_control_test.dir/build.make carTop/CMakeFiles/velTop_control_test.dir/src/velTop_control_test.cpp.s
+.PHONY : src/velTop_control_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -694,12 +694,12 @@ help:
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... carTop"
 	@echo "... actionlib_generate_messages_lisp"
-	@echo "... carTop_test"
 	@echo "... carTop_generate_messages_nodejs"
 	@echo "... actionlib_generate_messages_nodejs"
 	@echo "... list_install_components"
 	@echo "... _carTop_generate_messages_check_deps_carTop"
 	@echo "... carTop_generate_messages_cpp"
+	@echo "... velTop_control_test"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... carTop_gencpp"
 	@echo "... carTop_gennodejs"
@@ -707,15 +707,15 @@ help:
 	@echo "... src/carTop.o"
 	@echo "... src/carTop.i"
 	@echo "... src/carTop.s"
-	@echo "... src/carTop_test.o"
-	@echo "... src/carTop_test.i"
-	@echo "... src/carTop_test.s"
 	@echo "... src/velTop.o"
 	@echo "... src/velTop.i"
 	@echo "... src/velTop.s"
 	@echo "... src/velTop_control.o"
 	@echo "... src/velTop_control.i"
 	@echo "... src/velTop_control.s"
+	@echo "... src/velTop_control_test.o"
+	@echo "... src/velTop_control_test.i"
+	@echo "... src/velTop_control_test.s"
 .PHONY : help
 
 

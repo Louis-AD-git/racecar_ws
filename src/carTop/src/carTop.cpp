@@ -22,10 +22,12 @@
 
 #include <ctime>
 #include <stdint.h>
+#include <math.h>
 
 #include "carTop/carTop.h"//自定义消息类型
 
 #define PI 3.141592653
+#define L 0.8 //前后轴距
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
 using namespace std;
@@ -38,14 +40,72 @@ short turn_angle = 0.0;         //上报的转向角度
 short battery_level = 0.0;      //上报的电量百分比
 short error_flag = 0.0;         //上报的错误状态
 
+//ros::Time last_calculate_time = ros::Time::now();
+
+ void odomCalculate(const double& front_wheel_theta, const double& rear_wheel_vel,ros::Time& time, nav_msgs::Odometry& odom ){
+
+    double delta_t = ( ros::Time::now() - time ).toSec();
+    time = ros::Time::now();
+
+    odom.header.stamp = ros::Time::now();
+    odom.header.frame_id = "odom";
+    odom.pose.pose.position.x += rear_wheel_vel * delta_t * cos( front_wheel_theta * tan(front_wheel_theta) * rear_wheel_vel / L);
+    odom.pose.pose.position.y += rear_wheel_vel * delta_t * sin( front_wheel_theta * tan(front_wheel_theta) * rear_wheel_vel / L);
+
+    double delta_yaw = rear_wheel_vel * atan( front_wheel_theta ) * delta_t / L;
+
+    double yaw = delta_yaw + tf::getYaw ( odom.pose.pose.orientation ); 
+
+    odom.pose.pose.orientation  = tf::createQuaternionMsgFromYaw( yaw );
+
+    //odom.pose.covariance 
+
+    odom.pose.covariance[0]  = 0.1;   // x的协方差 
+    odom.pose.covariance[7]  = 0.1;	// y的协方差
+    odom.pose.covariance[35] = 0.2;   //theta的协方差
+
+    odom.pose.covariance[14] = 1e10; // set a non-zero covariance on unused    theta x axis
+    odom.pose.covariance[21] = 1e10; // dimensions (z, pitch and roll); this          theta y  axis
+    odom.pose.covariance[28] = 1e10; // is a requirement of robot_pose_ekf  
+    
+
+    odom.twist.twist.linear.x = rear_wheel_vel;
+    odom.twist.twist.angular.z = rear_wheel_vel * atan( front_wheel_theta ) / L;
+
+    //odom.twist.covariance 
+
+ }
+
+
 //send can data to AKM
 void SendSpeedToAKM(float lineSpeed,float angle)
 {
-    cout<<"speed"<<endl;
-
     int LineSpeed=0,Angle=0;
     LineSpeed = lineSpeed * 1000;        //ros里面的m/s转化为mm/s
-    Angle     = angle * 100*180/M_PI;
+    
+    
+     // Louis transform the angle_theta to yaw_rate
+    //Angle     = angle * 100*180/M_PI;
+
+    float yaw_rate,angle_theta; 
+    float wheel_longth = 0.8; //unit == m.
+    float max_angle_theta = 3.14 * 35/180;
+    float min_angle_theta = -3.14 * 35/180;
+    
+    if(fabs(lineSpeed) > 0.02){
+        angle_theta = atan( wheel_longth * angle / lineSpeed) ; 
+
+        if(angle_theta> max_angle_theta){
+            angle_theta = max_angle_theta;
+        }else if(angle_theta < min_angle_theta){
+            angle_theta = min_angle_theta;
+        }
+
+    }else{
+        angle_theta = 0;
+    }
+    Angle     = angle_theta * 100*180/M_PI;
+    
      //需要发送的帧，结构体设置
     VCI_CAN_OBJ send[1];
     send[0].ID=0x00000001;//根据底盘can协议，发送时候can的ID为0x01
@@ -167,7 +227,15 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Subscriber cmd_vel_sub = n.subscribe("/cmd_vel", 100, cmd_velCallback);//速度回调
     ros::Publisher car_pub      = n.advertise<carTop::carTop>("/car_message", 10);//自定义消息发布
-    ros::Rate loop_rate(20);
+    ros::Publisher odom_pub      = n.advertise<nav_msgs::Odometry>("/odom", 10);//自定义消息发布
+
+    ros::Rate loop_rate(10);
+    
+    nav_msgs::Odometry odom ;
+
+    ros::Time last_calculate_time = ros::Time::now();
+    
+    
 
     //档位设置
     //SetGear(0);
@@ -192,8 +260,12 @@ int main(int argc, char **argv)
                 msg.turn_angle = turn_angle/100.00*M_PI/180;
                 msg.battery_level = battery_level;
                 msg.error_flag = error_flag;
+
+                odomCalculate(( turn_angle/100.00*M_PI/180 ) * 0.01, back_wheel_speed * 0.001 ,last_calculate_time, odom );
+
             }
         }
+        odom_pub.publish(odom);
         car_pub.publish(msg);
         ros::spinOnce();
         loop_rate.sleep();

@@ -207,18 +207,17 @@ link_directories(
 # catkin_add_nosetests(test)
 
 add_executable(carTop src/carTop.cpp)
-add_executable(carTop_test src/carTop_test.cpp)
 add_executable(velTop src/velTop.cpp)
 add_executable(velTop_control src/velTop_control.cpp)
+add_executable(velTop_control_test src/velTop_control_test.cpp)
 
 
 add_dependencies(carTop car_generate_messages_cpp)
-add_dependencies(carTop_test car_generate_messages_cpp)
 add_dependencies(velTop car_generate_messages_cpp)
 add_dependencies(velTop_control car_generate_messages_cpp)
+add_dependencies(velTop_control_test car_generate_messages_cpp)
 
 target_link_libraries(carTop ${catkin_LIBRARIES} libcontrolcan.so)
-target_link_libraries(carTop_test ${catkin_LIBRARIES} libcontrolcan.so)
 target_link_libraries(velTop ${catkin_LIBRARIES})
 target_link_libraries(velTop_control ${catkin_LIBRARIES})
-
+target_link_libraries(velTop_control_test ${catkin_LIBRARIES})

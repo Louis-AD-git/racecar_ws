@@ -98,8 +98,8 @@ int main(int argc, char** argv)
    while (ros::ok())
 {
     geometry_msgs::TwistStamped ve;
-    ve.twist.linear.x =2.0;
-    ve.twist.angular.z = 0;
+    ve.twist.linear.x = 0.5;
+    ve.twist.angular.z = 0.2;
 
     v_pub.publish(ve);
 

@@ -31,8 +31,10 @@
     <param name="time_synchronization" value="$(arg time_synchronization)"/>
     <param name="scan_start_angle" value="0.0"/>
     <param name="scan_end_angle" value="36000.0"/>
+    <param name="publish_scan" value="true"/>
 
   </node>
  
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lslidar_c16_decoder)/launch/lslidar_c16.rviz"/>
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lslidar_c16_decoder)/launch/lslidar_c16.rviz"/>
+-->
 </launch>
